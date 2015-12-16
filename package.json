@@ -1,0 +1,27 @@
+{
+  "name": "react-elm-reverse",
+  "version": "1.0.0",
+  "description": "A little demo of embedding Elm in React Apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u001b[2~\u001b[2~https://github.com/NicholasGW/react-elm-embed-demo.git"
+  },
+  "author": "NicholasGW",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  },
+  "devDependencies": {
+    "express": "^4.13.3",
+    "webpack": "^1.12.9"
+  }
+}
