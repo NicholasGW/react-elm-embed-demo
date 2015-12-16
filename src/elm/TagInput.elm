@@ -93,3 +93,5 @@ tagToHtml address tag =
 
 main =
     StartApp.start { model = model, update = update, view = view }
+
+port tagFromReact : Signal (String)

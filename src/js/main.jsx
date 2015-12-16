@@ -1,12 +1,15 @@
 import React from 'react';
 import Dom from 'react-dom';
 
-import ElmTagInput from './elmEmbed.jsx'
+import ElmEmbed from './elmEmbed.jsx'
+import TagInput from './TagInput.jsx'
 const App = React.createClass({
   render () {
     return (
       <div> Test
-      <ElmTagInput />
+      <ElmEmbed elmModuleName="TagInput"/>
+      <hr />
+      <TagInput />
       </div>
     )
   }

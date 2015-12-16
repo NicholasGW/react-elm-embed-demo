@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./main.jsx",
+  entry: "./src/js/main.jsx",
   output: {
     filename: "bundle.js"
   },
@@ -7,5 +7,6 @@ module.exports = {
   loaders: [
     { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"}
   ]
-}
+},
+devtool: 'inline-source-map'
 }
