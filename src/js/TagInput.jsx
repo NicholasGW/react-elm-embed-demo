@@ -17,6 +17,9 @@ const TagInput = React.createClass({
     if (e.key === "Enter") {
       let tags = this.state.tags.concat([e.target.value]);
       this.setState({text: '', tags});
+      if (this.props.elmTagInput) {
+        this.props.elmTagInput.ports.tagFromReact.send(e.target.value);
+      }
     }
   },
 

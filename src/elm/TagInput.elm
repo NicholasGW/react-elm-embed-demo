@@ -1,10 +1,11 @@
 module TagInput where
 
+import Effects exposing (Effects, Never)
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Signal exposing (..)
-import StartApp.Simple as StartApp
+import StartApp as StartApp
 import Json.Decode as Json
 
 
@@ -17,6 +18,7 @@ type alias Model = { tags: List Tag,
 type Action
      = NoOp
      | Add
+     | AddFromReact String
      | Edit String
      | Remove Int
 
@@ -27,11 +29,11 @@ model = { tags = [],
         }
 
 
-update: Action -> Model -> Model
+update: Action -> Model -> ( Model, Effects Action)
 update action model =
   case action of
 
-    NoOp -> model
+    NoOp -> (model, Effects.none)
 
     Add ->
       let
@@ -39,16 +41,27 @@ update action model =
         text = model.inputText
         newTag = { id = id, text = text }
       in
-        { model |
+        ( { model |
             tags = newTag :: model.tags,
             inputText = ""
-        }
+        }, Effects.none)
 
     Edit string ->
-       { model | inputText = string }
+      ( { model | inputText = string }, Effects.none)
 
     Remove id ->
-      { model | tags = List.filter (\tag -> tag.id /= id) model.tags }
+      ( { model | tags = List.filter (\tag -> tag.id /= id) model.tags }, Effects.none)
+
+    AddFromReact string ->
+      let
+        id = (List.length model.tags) + 1
+        text = string
+        newTag = { id = id, text = text }
+      in
+        ( { model |
+            tags = newTag :: model.tags,
+            inputText = ""
+        }, Effects.none)
 
 
 view: Address Action -> Model -> Html
@@ -91,7 +104,12 @@ tagToHtml address tag =
     div [onRemove address tag.id] [text tag.text]
 
 
+app = StartApp.start { init = (model, Effects.none),
+                     update = update,
+                     view = view,
+                     inputs = [ Signal.map (\tag -> (AddFromReact tag)) tagFromReact]}
+
 main =
-    StartApp.start { model = model, update = update, view = view }
+  app.html
 
 port tagFromReact : Signal (String)

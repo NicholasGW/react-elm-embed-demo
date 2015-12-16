@@ -3,7 +3,8 @@ import React from 'react';
 const ElmEmbed = React.createClass({
 
   componentDidMount: function() {
-    Elm.embed(Elm[this.props.elmModuleName], document.getElementById("elmContainer"));
+    let elmTagInput = Elm.embed(Elm[this.props.elmModuleName], document.getElementById("elmContainer"), { tagFromReact: ""});
+    this.props.callback(elmTagInput);
   },
 
   render () {
