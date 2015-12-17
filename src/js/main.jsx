@@ -17,7 +17,7 @@ const App = React.createClass({
 
   render () {
     return (
-      <div> Test
+      <div>
       <ElmEmbed callback={this.callback} elmModuleName="TagInput"/>
       <hr />
       <TagInput elmTagInput={this.state.elmTagInput}/>

@@ -66,7 +66,7 @@ update action model =
 
 view: Address Action -> Model -> Html
 view address model =
-  div [] (tagInput address model.inputText :: tagList address model.tags)
+  div [] (h1 [] [text "ELM!"] :: tagInput address model.inputText :: tagList address model.tags)
 
 
 tagInput: Address Action -> String -> Html
@@ -113,3 +113,6 @@ main =
   app.html
 
 port tagFromReact : Signal (String)
+
+port elmTags : Signal (Maybe Tag)
+port elmTags = dropRepeats (Signal.map (\model -> List.head model.tags) app.model)

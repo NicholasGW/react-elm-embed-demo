@@ -9,6 +9,19 @@ const TagInput = React.createClass({
     };
   },
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.elmTagInput) {
+      if(nextProps.elmTagInput) {
+        nextProps.elmTagInput.ports.elmTags.subscribe(this.onElmTag);
+      }
+    }
+  },
+
+  onElmTag(tag) {
+    let tags = this.state.tags.concat([tag.text]);
+    this.setState({tags})
+  },
+
   onEditText(e) {
     this.setState({text: e.target.value});
   },
@@ -30,6 +43,7 @@ const TagInput = React.createClass({
   render () {
     return (
       <div>
+        <h1> React! </h1>
         <input value={this.state.text} onChange={this.onEditText} onKeyDown={this.onEnter}></input>
         {this.tagsAsHtml(this.state.tags)}
       </div>
